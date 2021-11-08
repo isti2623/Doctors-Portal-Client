@@ -2,7 +2,8 @@ import { Button, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import login from '../../../images/login.png'
-const Login = () => {
+
+const Register = () => {
     const [loginData, setLoginData] = useState({})
     const handleOnChange = e => {
         const field = e.target.name;
@@ -13,7 +14,11 @@ const Login = () => {
 
     }
     const handleLoginSubmit = e => {
-        alert('hello')
+        if (loginData.password !== loginData.password2) {
+            alert('your pasword didnot match');
+            return
+        }
+
         e.preventDefault();
     }
     return (
@@ -21,7 +26,7 @@ const Login = () => {
             <Grid container spacing={2}>
                 <Grid item style={{ marginTop: '250px' }} sx={{ mt: '8' }} xs={12} md={6}>
                     <Typography variant="body1" gutterBottom>
-                        Login
+                        Register
                     </Typography>
                     <form onSubmit={handleLoginSubmit}>
                         <TextField
@@ -29,6 +34,7 @@ const Login = () => {
                             id="standard-basic"
                             label="your email"
                             name="email"
+                            type="email"
                             onChange={handleOnChange}
                             variant="standard" />
                         <TextField
@@ -39,8 +45,16 @@ const Login = () => {
                             name="password"
                             onChange={handleOnChange}
                             variant="standard" />
+                        <TextField
+                            sx={{ width: '1', m: '1' }}
+                            id="standard-basic"
+                            label="ReType password"
+                            type="password"
+                            name="password2"
+                            onChange={handleOnChange}
+                            variant="standard" />
                         <Button type='submit' style={{ marginTop: '15px' }} sx={{ width: '1', m: '1' }} variant="contained">Login</Button>
-                        <NavLink style={{ textDecoration: 'none' }} to='/register'><Button type='submit' style={{ marginTop: '15px' }} sx={{ width: '1', m: '1' }} variant="text">New User? Please Register</Button></NavLink>
+                        <NavLink style={{ textDecoration: 'none' }} to='/login'><Button type='submit' style={{ marginTop: '15px' }} sx={{ width: '1', m: '1' }} variant="text">Already Register ? Please Login</Button></NavLink>
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -52,4 +66,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
