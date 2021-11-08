@@ -60,9 +60,10 @@ const useFirebase = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
+                saveUser(user.email, user.displayName, 'PUT');
+                setAuthError('');
                 const destination = location?.state?.from || '/';
                 history.replace(destination);
-                setAuthError('');
             }).catch((error) => {
                 setAuthError(error.message);
             }).finally(() => setIsLoading(false));
@@ -93,6 +94,7 @@ const useFirebase = () => {
 
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName };
+        console.log(user)
         fetch('http://localhost:5000/users', {
             method: method,
             headers: {
@@ -101,6 +103,8 @@ const useFirebase = () => {
             body: JSON.stringify(user)
         })
             .then()
+
+
     }
 
     return {
