@@ -3,30 +3,23 @@ import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import {
-    BrowserRouter as Router,
+
     Switch,
     Route,
     Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
 import DashboardHome from '../DashboardHome/DashboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
+import useAuth from '../../../hooks/useAuth';
 
 
 const drawerWidth = 200;
@@ -34,6 +27,7 @@ const drawerWidth = 200;
 function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { admin } = useAuth();
 
     let { path, url } = useRouteMatch();
 
@@ -46,8 +40,12 @@ function Dashboard(props) {
             <Toolbar />
             <Link to="/appointment"><Button color="inherit">Appointment</Button></Link>
             <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link>
-            <Link to={`${url}/makeAdmin`}><Button color="inherit">MakeAdmin</Button></Link>
-            <Link to={`${url}/addDoctor`}><Button color="inherit">AddDoctor</Button></Link>
+            {
+                admin && <Box>
+                    <Link to={`${url}/makeAdmin`}><Button color="inherit">MakeAdmin</Button></Link>
+                    <Link to={`${url}/addDoctor`}><Button color="inherit">AddDoctor</Button></Link>
+                </Box>
+            }
 
 
         </div>
