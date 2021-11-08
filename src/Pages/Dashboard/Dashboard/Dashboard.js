@@ -113,10 +113,10 @@ function Dashboard(props) {
                 <Toolbar />
                 <Typography paragraph>
                     <Grid container spacing={2}>
-                        <Grid item xs={8}>
+                        <Grid item xs={12} md={4}>
                             <Calendar></Calendar>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={12} md={8}>
                             <Appoinments></Appoinments>
                         </Grid>
 
