@@ -1,11 +1,20 @@
-import React from 'react';
-import { useParams } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const Payment = () => {
-    const { appoinmentId } = useParams();
+    const appointmentId = useParams().appoinmentId;
+    console.log(appointmentId);
+    const [appointment, setAppointment] = useState({});
+    useEffect(() => {
+        fetch(`http://localhost:5000/appointments/${appointmentId}`)
+            .then(res => res.json())
+            .then(data => setAppointment(data));
+    }, [appointmentId]);
     return (
         <div>
-            <h2>Please pay for : {appoinmentId}</h2>
+            <h2>Please Pay for: {appointment?.patientName} for {appointment?.serviceName}</h2>
+            <h4>Pay: ${appointment?.price}</h4>
+
         </div>
     );
 };

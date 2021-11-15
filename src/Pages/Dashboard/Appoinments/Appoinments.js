@@ -13,7 +13,7 @@ import { Button } from '@mui/material';
 const Appointments = ({ date }) => {
     const { user, token } = useAuth();
     const [appointments, setAppointments] = useState([])
-
+    console.log(appointments[0]);
     useEffect(() => {
         const newDate = date.toLocaleDateString();
         const url = `http://localhost:5000/appointments?email=${user.email}&date=${newDate}`
